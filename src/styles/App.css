@@ -1,0 +1,65 @@
+#root {
+  --background: linear-gradient(to bottom, #2b2b3b, #101018);
+
+  /* hsl color variables */
+  --banner-height: 4rem;
+  --red-banner: 355, 65%, 45%;
+  --blue-banner: 220, 65%, 45%;
+  --yellow-primary: 45, 100%, 60%;
+
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  position: relative;
+  background: var(--background);
+  width: 100%;
+  height: 100vh;
+  min-height: 100lvh;
+}
+
+.top-banner,
+.bottom-banner {
+  position: absolute;
+  width: 100%;
+  height: var(--banner-height);
+}
+
+.top-banner {
+  top: 0;
+  left: 0;
+  background: hsl(var(--red-banner));
+  border-radius: 0 0 100% 100% / 0 0 100% 100%;
+  box-shadow:
+    0 4px 0 hsl(var(--yellow-primary)),
+    0 10px 0 hsl(var(--red-banner)),
+    0 14px 4px rgba(0, 0, 0, 0.25);
+}
+
+.bottom-banner {
+  bottom: 0;
+  left: 0;
+  background: hsl(var(--blue-banner));
+  border-radius: 100% 100% 0 0 / 100% 100% 0 0;
+  box-shadow:
+    0 -4px 0 hsl(var(--yellow-primary)),
+    0 -10px 0 hsl(var(--blue-banner)),
+    0 -14px 4px rgba(0, 0, 0, 0.25);
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr;
+  width: 100%;
+  height: 100%;
+  padding-top: var(--banner-height);
+  padding-bottom: var(--banner-height);
+}
