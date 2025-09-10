@@ -81,6 +81,9 @@ main {
 }
 
 .card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   max-height: 100%;
   aspect-ratio: 2.5/3.5;
   overflow: hidden;
