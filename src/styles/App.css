@@ -37,7 +37,7 @@
   top: 0;
   left: 0;
   background: hsl(var(--red-banner));
-  border-radius: 0 0 100% 100% / 0 0 100% 100%;
+  border-radius: 0 0 100% 100% / 0 0 60px 60px;
   box-shadow:
     0 4px 0 hsl(var(--yellow-primary)),
     0 10px 0 hsl(var(--red-banner)),
@@ -48,7 +48,7 @@
   bottom: 0;
   left: 0;
   background: hsl(var(--blue-banner));
-  border-radius: 100% 100% 0 0 / 100% 100% 0 0;
+  border-radius: 100% 100% 0 0 / 60px 60px 0 0;
   box-shadow:
     0 -4px 0 hsl(var(--yellow-primary)),
     0 -10px 0 hsl(var(--blue-banner)),
