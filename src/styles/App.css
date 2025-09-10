@@ -82,11 +82,11 @@ main {
 
 .card {
   max-height: 100%;
+  aspect-ratio: 2.5/3.5;
   overflow: hidden;
 }
 
 .card img {
-  /* display: none; */
-  max-height: 100%;
+  max-width: 100%;
   width: auto;
 }
