@@ -30,7 +30,18 @@ function App() {
         <div className="center">
           <CardContainer visibleCards={visibleCards} />
         </div>
-        <div className="right"></div>
+        <div className="right">
+          <div className="scores">
+            <div className="score-container best-score">
+              Best Score
+              <div className="score">9</div>
+            </div>
+            <div className="score-container">
+              Score
+              <div className="score">3</div>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   );
