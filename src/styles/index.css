@@ -1,3 +1,17 @@
+@font-face {
+  src: url("../assets/fonts/Inter-VariableFont_opsz\,wght.ttf");
+  font-family: "Inter";
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  src: url("../assets/fonts/Quantico-Bold.ttf");
+  font-family: "Quantico";
+  font-weight: 700;
+  font-style: normal;
+}
+
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
