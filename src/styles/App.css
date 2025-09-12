@@ -87,9 +87,39 @@ main {
   max-height: 100%;
   aspect-ratio: 2.5/3.5;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .card img {
   max-width: 100%;
   width: auto;
+}
+
+.right {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 2rem;
+}
+
+.scores {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  font-family: "Quantico";
+  color: white;
+}
+
+.score-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.best-score {
+  color: hsl(var(--yellow-primary));
+}
+
+.score {
+  font-size: 2rem;
 }
