@@ -7,19 +7,130 @@ async function getCards() {
   const tcgdex = new TCGdex("en");
   const sets = await tcgdex.fetch("sets", "sv03.5");
 
-  return sets.cards;
+  return sets ? sets.cards : null;
 }
 
 function App() {
   const [cards, setCards] = useState(null);
+  const [unclickedCards, setUnclickedCards] = useState([]);
+  const [clickedCards, setClickedCards] = useState([]);
 
+  // initialize cards
   useEffect(() => {
-    getCards().then((result) => setCards(result));
+    getCards().then((result) => {
+      // convert array into object with ids paired to images
+      let cardsObject = result.reduce((accumulator, card) => {
+        accumulator[card.id] = card.image;
+
+        return accumulator;
+      }, {});
+
+      setCards(cardsObject);
+      setUnclickedCards(Object.keys(cardsObject));
+    });
   }, []);
 
-  let visibleCards = cards ? cards.slice(0, 6) : null;
+  function getRandomIndex(n) {
+    return Math.floor(Math.random() * n);
+  }
 
-  console.log(visibleCards);
+  function createCardObject(id, image) {
+    let card = {};
+    card.id = id;
+    card.image = image;
+
+    return card;
+  }
+
+  // fisher yates shuffle
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+
+    return array;
+  }
+
+  let visibleCards = [];
+
+  if (cards !== null) {
+    // get up to two cards from unclicked
+    for (let i = 0; i < 2; i++) {
+      if (unclickedCards.length <= i) {
+        break;
+      }
+      let randomCardId = unclickedCards[getRandomIndex(unclickedCards.length)];
+
+      // avoid duplicates
+      while (visibleCards.find((card) => card.id === randomCardId)) {
+        randomCardId = unclickedCards[getRandomIndex(unclickedCards.length)];
+      }
+
+      let card = createCardObject(randomCardId, cards[randomCardId]);
+
+      visibleCards.push(card);
+    }
+
+    // get up to four cards from clicked
+    for (let i = 0; i < 4; i++) {
+      if (clickedCards.length <= i) {
+        break;
+      }
+
+      let randomCardId = clickedCards[getRandomIndex(clickedCards.length)];
+
+      // avoid duplicates
+      while (visibleCards.find((card) => card.id === randomCardId)) {
+        randomCardId = clickedCards[getRandomIndex(clickedCards.length)];
+      }
+
+      let card = createCardObject(randomCardId, cards[randomCardId]);
+
+      visibleCards.push(card);
+    }
+
+    // if there are remaining slots, get them from the bigger list (unclicked or clicked)
+    let biggerList =
+      unclickedCards.length > clickedCards.length
+        ? unclickedCards
+        : clickedCards;
+
+    while (visibleCards.length < 6) {
+      let randomCardId = biggerList[getRandomIndex(biggerList.length)];
+
+      // avoid duplicates
+      while (visibleCards.find((card) => card.id === randomCardId)) {
+        randomCardId = biggerList[getRandomIndex(biggerList.length)];
+      }
+
+      let card = createCardObject(randomCardId, cards[randomCardId]);
+
+      visibleCards.push(card);
+    }
+
+    // shuffle visible cards
+    visibleCards = shuffle([...visibleCards]);
+  }
+
+  function handleOnClick(cardId) {
+    let newClickedCards;
+    let newUnclickedCards;
+
+    if (!clickedCards.includes(cardId)) {
+      newClickedCards = [...clickedCards, cardId];
+      // remove clicked card id from unclicked list
+      unclickedCards.splice(unclickedCards.indexOf(cardId), 1);
+    } else {
+      newClickedCards = [...clickedCards];
+    }
+
+    newUnclickedCards = unclickedCards;
+
+    setClickedCards(newClickedCards);
+    setUnclickedCards(newUnclickedCards);
+  }
 
   return (
     <div id="root">
@@ -28,7 +139,7 @@ function App() {
       <main>
         <div className="left"></div>
         <div className="center">
-          <CardContainer visibleCards={visibleCards} />
+          <CardContainer visibleCards={visibleCards} onClick={handleOnClick} />
         </div>
         <div className="right">
           <div className="scores">
