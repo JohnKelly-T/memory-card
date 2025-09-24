@@ -14,6 +14,8 @@ function App() {
   const [cards, setCards] = useState(null);
   const [unclickedCards, setUnclickedCards] = useState([]);
   const [clickedCards, setClickedCards] = useState([]);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
 
   // initialize cards
   useEffect(() => {
@@ -120,16 +122,28 @@ function App() {
 
     if (!clickedCards.includes(cardId)) {
       newClickedCards = [...clickedCards, cardId];
+
       // remove clicked card id from unclicked list
-      unclickedCards.splice(unclickedCards.indexOf(cardId), 1);
+      newUnclickedCards = [...unclickedCards];
+      newUnclickedCards.splice(newUnclickedCards.indexOf(cardId), 1);
+
+      // increment scores
+      let nextScore = currentScore + 1;
+      setCurrentScore(nextScore);
+
+      if (nextScore > bestScore) {
+        setBestScore(nextScore);
+      }
     } else {
-      newClickedCards = [...clickedCards];
+      // reset lists
+      newClickedCards = [];
+      newUnclickedCards = Object.keys(cards);
+      // reset score
+      setCurrentScore(0);
     }
 
-    newUnclickedCards = unclickedCards;
-
-    setClickedCards(newClickedCards);
     setUnclickedCards(newUnclickedCards);
+    setClickedCards(newClickedCards);
   }
 
   return (
@@ -145,11 +159,11 @@ function App() {
           <div className="scores">
             <div className="score-container best-score">
               Best Score
-              <div className="score">9</div>
+              <div className="score">{bestScore}</div>
             </div>
             <div className="score-container">
               Score
-              <div className="score">3</div>
+              <div className="score">{currentScore}</div>
             </div>
           </div>
         </div>
