@@ -1,3 +1,5 @@
+import Card from "./Card";
+
 function CardContainer({ visibleCards, onClick }) {
   if (!visibleCards) return null;
 
@@ -8,9 +10,11 @@ function CardContainer({ visibleCards, onClick }) {
     <div className="card-container">
       {visibleCards.map((card) => {
         return (
-          <div key={card.id} className="card" onClick={() => onClick(card.id)}>
-            <img src={card.image + "/" + quality + "." + extension} alt="" />
-          </div>
+          <Card
+            key={card.id}
+            handleClick={() => onClick(card.id)}
+            imgSrc={card.image + "/" + quality + "." + extension}
+          />
         );
       })}
     </div>
