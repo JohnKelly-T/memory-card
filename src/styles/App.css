@@ -115,7 +115,7 @@ main {
   backface-visibility: hidden;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 0 8px rgba(255, 225, 0, 0.4);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .card-back {
