@@ -3,6 +3,7 @@ import Card from "./Card";
 
 function CardContainer({ visibleCards, onClick }) {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [isClickEnabled, setIsClickEnabled] = useState(true);
 
   if (!visibleCards) return null;
 
@@ -10,15 +11,22 @@ function CardContainer({ visibleCards, onClick }) {
   let extension = "webp";
 
   function handleCardClick(id) {
-    setIsFlipped(true);
+    if (!isClickEnabled) {
+      return;
+    }
 
-    setTimeout(() => {
-      onClick(id);
-    }, 500);
+    setIsFlipped(true);
+    setIsClickEnabled(false);
+
+    onClick(id);
 
     setTimeout(() => {
       setIsFlipped(false);
     }, 1000);
+
+    setTimeout(() => {
+      setIsClickEnabled(true);
+    }, 1500);
   }
 
   return (
