@@ -1,11 +1,8 @@
-import { useState } from "react";
 import pokemonCardBack from "../assets/img/pokemon-card-back.webp";
 
-function Card({ handleClick, imgSrc }) {
-  const [isFlipped, setIsFlipped] = useState(false);
-
+function Card({ handleClick, isFlipped, imgSrc }) {
   return (
-    <div className="card" onClick={handleClick}>
+    <div className={isFlipped ? "card flipped" : "card"} onClick={handleClick}>
       <div className="card-front">
         <img src={imgSrc} />
       </div>
