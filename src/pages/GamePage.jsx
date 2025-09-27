@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CardContainer from "../components/CardContainer";
 
-function GamePage({ cards, onBackClick }) {
+function GamePage({ cards, onBackClick, onGameOver }) {
   const [unclickedCards, setUnclickedCards] = useState([]);
   const [clickedCards, setClickedCards] = useState([]);
   const [currentScore, setCurrentScore] = useState(0);
@@ -122,6 +122,8 @@ function GamePage({ cards, onBackClick }) {
       newUnclickedCards = Object.keys(cards);
       // reset score
       setCurrentScore(0);
+      // open gameover page
+      onGameOver();
     }
 
     setUnclickedCards(newUnclickedCards);
