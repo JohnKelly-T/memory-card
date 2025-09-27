@@ -29,12 +29,16 @@ function App() {
     });
   }, []);
 
+  function handleBackClick() {
+    setPage("start");
+  }
+
   return (
     <div id="root">
       {page === "start" ? (
         <StartPage handleClick={() => setPage("game")} />
       ) : (
-        <GamePage cards={cards} />
+        <GamePage cards={cards} onBackClick={handleBackClick} />
       )}
 
       <div className={page === "start" ? "top-banner start" : "top-banner"}>
