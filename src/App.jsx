@@ -3,6 +3,7 @@ import "./styles/App.css";
 import TCGdex from "@tcgdex/sdk";
 import GamePage from "./pages/GamePage";
 import StartPage from "./pages/Startpage";
+import GameOverPage from "./pages/GameOverPage";
 
 async function getCards() {
   const tcgdex = new TCGdex("en");
@@ -29,19 +30,47 @@ function App() {
     });
   }, []);
 
-  function handleBackClick() {
+  function openStartPage() {
     setPage("start");
+  }
+
+  function openGamePage() {
+    setPage("game");
+  }
+
+  function openGameOverPage() {
+    setPage("gameover");
+  }
+
+  let displayPage = null;
+
+  if (page === "start") {
+    displayPage = <StartPage handleClick={openGamePage} />;
+  } else if (page === "game") {
+    displayPage = (
+      <GamePage
+        cards={cards}
+        onBackClick={openStartPage}
+        onGameOver={openGameOverPage}
+      />
+    );
+  } else if (page === "gameover") {
+    displayPage = (
+      <GameOverPage handleQuit={openStartPage} handlePlayAgain={openGamePage} />
+    );
   }
 
   return (
     <div id="root">
-      {page === "start" ? (
-        <StartPage handleClick={() => setPage("game")} />
-      ) : (
-        <GamePage cards={cards} onBackClick={handleBackClick} />
-      )}
+      {displayPage}
 
-      <div className={page === "start" ? "top-banner start" : "top-banner"}>
+      <div
+        className={
+          page === "start" || page === "gameover"
+            ? "top-banner large-banner"
+            : "top-banner"
+        }
+      >
         <svg
           className="pokeball-icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -54,9 +83,13 @@ function App() {
         </svg>
       </div>
       <div
-        className={page === "start" ? "bottom-banner start" : "bottom-banner"}
+        className={
+          page === "start" || page === "gameover"
+            ? "bottom-banner large-banner"
+            : "bottom-banner"
+        }
       >
-        {page === "start" ? (
+        {page === "start" || page === "gameover" ? (
           <div>
             @ 2025 Developed and Designed by{" "}
             <a href="https://github.com/JohnKelly-T">John Kelly C. Temeña</a>
