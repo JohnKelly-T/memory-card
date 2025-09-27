@@ -1,11 +1,25 @@
 import { useEffect, useState } from "react";
 import CardContainer from "../components/CardContainer";
 
+function getInitialBestScore() {
+  let storedBestScore = localStorage.getItem("bestScore");
+
+  if (storedBestScore) {
+    return Number(storedBestScore);
+  }
+
+  return 0;
+}
+
 function GamePage({ cards, onBackClick, onGameOver }) {
   const [unclickedCards, setUnclickedCards] = useState([]);
   const [clickedCards, setClickedCards] = useState([]);
   const [currentScore, setCurrentScore] = useState(0);
-  const [bestScore, setBestScore] = useState(0);
+  const [bestScore, setBestScore] = useState(getInitialBestScore());
+
+  useEffect(() => {
+    localStorage.setItem("bestScore", bestScore);
+  }, [bestScore]);
 
   useEffect(() => {
     if (cards === null) {
