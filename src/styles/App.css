@@ -125,9 +125,11 @@ main.gameoverpage {
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  padding: 2rem;
 }
 
 .gameover-message {
+  text-align: center;
   color: hsl(var(--yellow-primary));
   font-weight: 700;
   font-size: 2rem;
@@ -163,6 +165,14 @@ main.gameoverpage {
   box-shadow:
     0 4px 0 hsl(40, 100%, 20%),
     0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+@media screen and (max-width: 450px) {
+  .options {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2rem;
+  }
 }
 
 .gamepage.hidden,
