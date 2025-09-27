@@ -58,7 +58,7 @@ function App() {
             <a href="https://github.com/JohnKelly-T">John Kelly C. Temeña</a>
           </div>
         ) : (
-          "Click cards only once to earn points!"
+          "Click cards only once to earn points! Up to 207 cards to memorize!"
         )}
       </div>
     </div>
