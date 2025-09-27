@@ -272,3 +272,22 @@ main.startpage {
 .score {
   font-size: 2rem;
 }
+
+.left {
+  display: flex;
+  padding: 2rem;
+  justify-content: start;
+  align-items: center;
+}
+
+.back-button {
+  width: 2rem;
+  color: white;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.5));
+  cursor: pointer;
+  transition: scale 200ms ease;
+}
+
+.back-button:hover {
+  scale: 1.2;
+}
