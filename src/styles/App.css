@@ -74,12 +74,21 @@
   font-weight: 500;
   bottom: 0;
   left: 0;
+  padding: 1rem;
   background: hsl(var(--blue-banner));
   border-radius: 100% 100% 0 0 / 60px 60px 0 0;
   box-shadow:
     0 -4px 0 hsl(var(--yellow-primary)),
     0 -10px 0 hsl(var(--blue-banner)),
     0 -14px 4px rgba(0, 0, 0, 0.25);
+}
+
+.bottom-banner div {
+  display: flex;
+  text-wrap: nowrap;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
 }
 
 a {
