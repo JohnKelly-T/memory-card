@@ -39,7 +39,7 @@ function App() {
 
       <div className={page === "start" ? "top-banner start" : "top-banner"}>
         <svg
-          class="pokeball-icon"
+          className="pokeball-icon"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >
@@ -51,7 +51,16 @@ function App() {
       </div>
       <div
         className={page === "start" ? "bottom-banner start" : "bottom-banner"}
-      ></div>
+      >
+        {page === "start" ? (
+          <div>
+            @ 2025 Developed and Designed by{" "}
+            <a href="https://github.com/JohnKelly-T">John Kelly C. Temeña</a>
+          </div>
+        ) : (
+          "Click cards only once to earn points!"
+        )}
+      </div>
     </div>
   );
 }
