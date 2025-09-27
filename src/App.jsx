@@ -92,7 +92,8 @@ function App() {
         {page === "start" || page === "gameover" ? (
           <div>
             @ 2025 Developed and Designed by{" "}
-            <a href="https://github.com/JohnKelly-T">John Kelly C. Temeña</a>
+            <a href="https://github.com/JohnKelly-T">John Kelly C. Temeña</a>|
+            Powered by <a href="https://tcgdex.dev/">TCGdex</a>
           </div>
         ) : (
           "Click cards only once to earn points! Up to 207 cards to memorize!"
